@@ -35,7 +35,7 @@ class MqTestReceiverThread2 extends Thread {
 		// 消费者，消息接收者
 		MessageConsumer consumer;
 		connectionFactory = new ActiveMQConnectionFactory(ActiveMQConnection.DEFAULT_USER,
-				ActiveMQConnection.DEFAULT_PASSWORD, "tcp://172.16.2.80:61616");
+				ActiveMQConnection.DEFAULT_PASSWORD, "tcp://172.17.1.28:61616");
 		try {
 			// 构造从工厂得到连接对象
 			connection = connectionFactory.createConnection();
@@ -44,8 +44,8 @@ class MqTestReceiverThread2 extends Thread {
 			// 获取操作连接
 			session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
 			// 获取session注意参数值xingbo.xu-queue是一个服务器的queue，须在在ActiveMq的console配置
-//			destination = session.createQueue("SimpleTest");
-			destination = session.createTopic("SimpleTest");
+			destination = session.createQueue("gpsAndroidUploadGiLocationBd2Queue");
+//			destination = session.createTopic("gpsAndroidUploadGiLocationBd2Queue");
 			consumer = session.createConsumer(destination);
 			while (true) {
 				// 设置接收者接收消息的时间，为了便于测试，这里谁定为100s
